@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 public class SendsorActivity extends Activity{
     private static Context CONTEXT;
     private Button button;
+    boolean startet = false;
     /*
      * Gettermethoden 
      */
@@ -30,11 +32,30 @@ public class SendsorActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         CONTEXT = this;
-        Intent intent = new Intent(this, SendsorService.class);
-        CONTEXT.startService(intent);
+        final Intent intent = new Intent(this, SendsorService.class);
+        //CONTEXT.startService(intent);
         ((TextView) findViewById(R.id.text)).setText("Gestartet");
         button = (Button) findViewById(R.id.startstop);
         button.setText("start");
+ 
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ((TextView) findViewById(R.id.text)).setText("klick");
+                if (Boolean.FALSE.equals(startet)){
+                    ((TextView) findViewById(R.id.text)).setText("Gestartet!");
+                    startet=true;
+                    button.setText("stoppen");
+                    CONTEXT.startService(intent);
+
+                }
+                else{
+                    ((TextView) findViewById(R.id.text)).setText("Gestopt");
+                    startet = false;
+                    CONTEXT.stopService(intent);
+
+                }
+            }
+        });
 
     }
     

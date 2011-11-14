@@ -57,7 +57,7 @@ public class SendsorService extends Service implements AccelerometerListener{
 	 * Methode, die beim Start des Service ausgef&uuml;rt wird
 	 */
 	public void onCreate(){
-		Toast.makeText(this, "My Service Created", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "Service erstellt", Toast.LENGTH_LONG).show();
 		System.out.println("Service gestartet");
 		AccelerometerManager.startListening(this);
 		CONTEXT = this.getApplicationContext();
@@ -74,6 +74,8 @@ public class SendsorService extends Service implements AccelerometerListener{
 		AccelerometerManager.stopListening();
 		writer.flushout();
 		writer.stopWriting();
+		Toast.makeText(this, "Service gestopt", Toast.LENGTH_LONG).show();
+
 	}
 
 	/**

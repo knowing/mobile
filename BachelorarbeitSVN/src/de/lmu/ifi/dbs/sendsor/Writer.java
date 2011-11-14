@@ -12,6 +12,7 @@ import java.util.Date;
 import android.content.Context;
 import android.hardware.Camera.Size;
 import android.os.Environment;
+import android.widget.Toast;
 
 /**
  * Klasse zum Schreiben der Accelerometerdaten
@@ -52,6 +53,8 @@ public class Writer{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}
+		Toast.makeText(SendsorActivity.getContext(), "Writer gestartet", 5).show();
+
 	}
 	
 	/**
@@ -62,6 +65,7 @@ public class Writer{
 	 */
 	public void writeData(float x, float y, float z){
 		try {
+			
 			x/=9.81;
 			x*=64;
 			y/=9.81;
@@ -94,7 +98,9 @@ public class Writer{
 	
 	public void stopWriting(){
 		try {
+			out.flush();
 			out.close();
+			Toast.makeText(SendsorActivity.getContext(), "Writer gestopt", 5).show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
