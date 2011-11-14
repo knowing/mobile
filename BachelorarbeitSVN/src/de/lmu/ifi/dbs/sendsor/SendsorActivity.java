@@ -31,7 +31,7 @@ public class SendsorActivity extends Activity{
         CONTEXT = this;
         Intent intent = new Intent(this, SendsorService.class);
         CONTEXT.startService(intent);
-        ((TextView) findViewById(R.id.t)).setText("Gestartet");
+        ((TextView) findViewById(R.id.text)).setText("Gestartet");
 
     }
     
@@ -75,6 +75,6 @@ public class SendsorActivity extends Activity{
      * @param error
      */
     public void writeError(String error){
-        ((TextView) findViewById(R.id.t)).setText(error);
+        ((TextView) findViewById(R.id.text)).setText(error);
     }
 }
