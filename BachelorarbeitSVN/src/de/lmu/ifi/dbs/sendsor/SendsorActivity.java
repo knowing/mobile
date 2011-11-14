@@ -21,18 +21,13 @@ public class SendsorActivity extends Activity{
      */
     
 	
-    /** Called when the activity is first created. */
+    /**
+     * Wird beim Methodenstart aufgerufen und initialisiert halles.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        try{
-        BufferedWriter out = new BufferedWriter(new FileWriter(new File(Environment.getExternalStorageDirectory(), "activity"),true),1200);
-        out.write("hallo");
-        }
-        catch(Exception e){
-        	
-        }
         CONTEXT = this;
         Intent intent = new Intent(this, SendsorService.class);
         CONTEXT.startService(intent);
@@ -40,17 +35,24 @@ public class SendsorActivity extends Activity{
 
     }
     
-
+    /**
+     * Wird beim aufruf minimierter Apps aufgerufen
+     */
     protected void onResume() {
         super.onResume();
     }
  
+    /**
+     * Wird beim Legen in den Hintergrund aufgerufen
+     */
     protected void onPause(){
     	super.onPause();
     	
     }
     
-    
+    /**
+     * Wird beim Beenden der App aufgerufen
+     */
     protected void onDestroy() {
         super.onDestroy();
         Intent intent = new Intent(this, SendsorService.class);
@@ -59,12 +61,19 @@ public class SendsorActivity extends Activity{
  
     }
  
+    /**
+     * Gibt den Context zur&uuml;ck
+     * @return Context
+     */
     public static Context getContext() {
         return CONTEXT;
     }
  
 
-    
+    /**
+     * K&uuml;mmert sich um die Fehlerbehanldung
+     * @param error
+     */
     public void writeError(String error){
         ((TextView) findViewById(R.id.t)).setText(error);
     }

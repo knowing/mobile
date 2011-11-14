@@ -1,7 +1,7 @@
 package de.lmu.ifi.dbs.sendsor;
 
 /**
- * @version 0.1
+ * @version 0.5
  * @author walonka
  *
  * Interface f&uuml;r die Verarbeitung der vom Sensor gelieferten Daten

@@ -9,7 +9,11 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-
+/**
+ * Verwaltet die Sensoren und gibt Werte weiter
+ * @author walonka
+ * @version 0.5
+ */
 public class AccelerometerManager implements Config {
 	private static Sensor sensor;
     private static SensorManager sensorManager;

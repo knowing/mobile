@@ -16,6 +16,7 @@ import android.os.Environment;
 /**
  * Klasse zum Schreiben der Accelerometerdaten
  * @author walonka
+ * @version 0.5
  *
  */
 public class Writer{
@@ -25,7 +26,10 @@ public class Writer{
 	private String filename;
 	final static String lineSeparator = System.getProperty("line.separator");
 	
-	
+	/**
+	 * Konstruktor der Writerklasse
+	 * @param filename Dateiname (wo soll die Datenbank gespeichert werden?)
+	 */
 	public Writer (String filename){
 		this.context=SendsorActivity.getContext();
 		this.filename=filename;
@@ -50,6 +54,12 @@ public class Writer{
 		}
 	}
 	
+	/**
+	 * Methode zum Schreiben von Accelerometerwerten
+	 * @param x X-Beschleunigung
+	 * @param y Y-Beschleunigung
+	 * @param z Z-Beschleunigung
+	 */
 	public void writeData(float x, float y, float z){
 		try {
 			x/=9.81;
@@ -72,10 +82,21 @@ public class Writer{
 		}
 	}
 	
+	/**
+	 * Methode zum kompletten Schreiben aller noch im Puffer befindlichen Daten
+	 */
 	public void flushout(){
 		try {
 			out.flush();
 		} catch (IOException e) {
+		}
+	}
+	
+	public void stopWriting(){
+		try {
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
