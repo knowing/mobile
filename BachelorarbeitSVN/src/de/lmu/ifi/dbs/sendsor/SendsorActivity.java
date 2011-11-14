@@ -10,12 +10,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class SendsorActivity extends Activity{
     private static Context CONTEXT;
-
+    private Button button;
     /*
      * Gettermethoden 
      */
@@ -32,6 +33,8 @@ public class SendsorActivity extends Activity{
         Intent intent = new Intent(this, SendsorService.class);
         CONTEXT.startService(intent);
         ((TextView) findViewById(R.id.text)).setText("Gestartet");
+        button = (Button) findViewById(R.id.startstop);
+        button.setText("start");
 
     }
     
