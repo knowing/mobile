@@ -25,6 +25,7 @@ public class Writer{
 	private BufferedWriter out;
 	private File filepath = Environment.getExternalStorageDirectory();
 	private String filename;
+	private String activity="";
 	final static String lineSeparator = System.getProperty("line.separator");
 	
 	/**
@@ -80,7 +81,7 @@ public class Writer{
 			//String.format
 			//out.write(System.currentTimeMillis()+";"+x+";"+y+";"+z+lineSeparator);*/
 			//out.write(d.getYear()+"-"+d.getMonth()+"-"+d.getDay()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"."+milli+","+(int)x+","+(int)y+","+(int)z+lineSeparator);
-			out.write(c.get(Calendar.YEAR)+"-"+c.get(Calendar.MONTH)+"-"+c.get(Calendar.DATE)+" "+c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE)+":"+c.get(Calendar.SECOND)+"."+c.get(Calendar.MILLISECOND)+","+(int)x+","+(int)y+","+(int)z+lineSeparator);
+			out.write(c.get(Calendar.YEAR)+"-"+c.get(Calendar.MONTH)+"-"+c.get(Calendar.DATE)+" "+c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE)+":"+c.get(Calendar.SECOND)+"."+c.get(Calendar.MILLISECOND)+","+(int)x+","+(int)y+","+(int)z+","+activity+lineSeparator);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}
@@ -104,5 +105,9 @@ public class Writer{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void setActivity(String activity){
+		this.activity=activity;
 	}
 }

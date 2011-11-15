@@ -18,7 +18,9 @@ import android.widget.Toast;
 public class SendsorActivity extends Activity{
     private static Context CONTEXT;
     private Button button;
+    private Button activityButton;
     boolean startet = false;
+    private static Writer writer;
     /*
      * Gettermethoden 
      */
@@ -53,6 +55,27 @@ public class SendsorActivity extends Activity{
                     startet = false;
                     button.setText("starten");
                     CONTEXT.stopService(intent);
+
+                }
+            }
+        });
+        ((TextView) findViewById(R.id.text)).setText("Bitte die Datenaufzeichnung starten!");
+        activityButton = (Button) findViewById(R.id.startstop);
+        activityButton.setText("ich laufe jetzt");
+ 
+        //TODO Buttons für Activities erstellen
+        activityButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (Boolean.FALSE.equals(startet)){
+                    ((TextView) findViewById(R.id.text)).setText("ich laufe nicht mehr!");
+                    startet=true;
+                    activityButton.setText("stoppen");
+
+                }
+                else{
+                    ((TextView) findViewById(R.id.text)).setText("ich laufe jetzt");
+                    startet = false;
+                    button.setText("starten");
 
                 }
             }
@@ -101,5 +124,9 @@ public class SendsorActivity extends Activity{
      */
     public void writeError(String error){
         ((TextView) findViewById(R.id.text)).setText(error);
+    }
+    
+    public static void setWriter (Writer writer_){
+    	writer=writer_;
     }
 }
