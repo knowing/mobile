@@ -32,7 +32,6 @@ public class SendsorService extends Service implements AccelerometerListener{
 	public void onAccelerationChanged(float x, float y, float z) {
 			System.out.println("x = "+x+" y = "+y+" z = "+z);
 			writer.writeData(x, y, z);
-			writer.flushout();
 		
 	}
 

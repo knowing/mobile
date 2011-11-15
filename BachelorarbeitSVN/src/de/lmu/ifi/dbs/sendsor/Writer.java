@@ -48,7 +48,7 @@ public class Writer{
 		catch(Exception e){
 		}
 		try {
-			out = new BufferedWriter(new FileWriter(new File(filepath, filename),true),1200);
+			out = new BufferedWriter(new FileWriter(new File(filepath, filename),true),76800);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

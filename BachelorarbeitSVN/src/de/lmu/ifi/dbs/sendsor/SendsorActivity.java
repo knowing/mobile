@@ -34,7 +34,7 @@ public class SendsorActivity extends Activity{
         CONTEXT = this;
         final Intent intent = new Intent(this, SendsorService.class);
         //CONTEXT.startService(intent);
-        ((TextView) findViewById(R.id.text)).setText("Gestartet");
+        ((TextView) findViewById(R.id.text)).setText("Bitte die Datenaufzeichnung starten!");
         button = (Button) findViewById(R.id.startstop);
         button.setText("start");
  
