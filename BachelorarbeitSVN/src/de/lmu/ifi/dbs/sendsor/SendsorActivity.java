@@ -49,8 +49,9 @@ public class SendsorActivity extends Activity{
 
                 }
                 else{
-                    ((TextView) findViewById(R.id.text)).setText("Gestopt");
+                    ((TextView) findViewById(R.id.text)).setText("Gestoppt");
                     startet = false;
+                    button.setText("starten");
                     CONTEXT.stopService(intent);
 
                 }
