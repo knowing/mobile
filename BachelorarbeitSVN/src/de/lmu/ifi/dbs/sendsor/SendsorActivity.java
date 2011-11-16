@@ -33,14 +33,22 @@ public class SendsorActivity extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        CONTEXT = this;
-        final Intent intent = new Intent(this, SendsorService.class);
-        //CONTEXT.startService(intent);
+        CONTEXT = this; //Setzen des Context
+        writer = Singleton.getWriter(); //Holen der Schreiberadresse
+        final Intent intent = new Intent(this, SendsorService.class); //Setzen der Umgebung
         ((TextView) findViewById(R.id.text)).setText("Bitte die Datenaufzeichnung starten!");
+       
+        /*
+         * Erstellen des Start/Stopknopfs
+         */
         button = (Button) findViewById(R.id.startstop);
         button.setText("start");
-        startet=Singleton.serviceRunning;
+        startet=Singleton.serviceRunning; //ist der Service gestartet?
  
+        if(Boolean.TRUE.equals(startet)){
+            ((TextView) findViewById(R.id.text)).setText("Datenaufzeichnung laeuft!");
+            button.setText("stoppen");
+        }
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ((TextView) findViewById(R.id.text)).setText("klick");
@@ -56,12 +64,9 @@ public class SendsorActivity extends Activity{
                     startet = false;
                     button.setText("starten");
                     CONTEXT.stopService(intent);
-
                 }
             }
         });
-        ((TextView) findViewById(R.id.text)).setText("Bitte die Datenaufzeichnung starten!");
- 
 
     }
     
@@ -108,7 +113,4 @@ public class SendsorActivity extends Activity{
         ((TextView) findViewById(R.id.text)).setText(error);
     }
     
-    public static void setWriter (Writer writer_){
-    	writer=writer_;
-    }
 }
