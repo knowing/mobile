@@ -30,7 +30,7 @@ public class SendsorService extends Service implements AccelerometerListener{
 	 * @param z Z-Beschleunigung
 	 */
 	public void onAccelerationChanged(float x, float y, float z) {
-			System.out.println("x = "+x+" y = "+y+" z = "+z);
+			//System.out.println("x = "+x+" y = "+y+" z = "+z);
 			writer.writeData(x, y, z);
 		
 	}
@@ -60,7 +60,8 @@ public class SendsorService extends Service implements AccelerometerListener{
 		System.out.println("Service gestartet");
 		AccelerometerManager.startListening(this);
 		CONTEXT = this.getApplicationContext();
-        writer=new Writer("database"+".csv");
+        writer=Singleton.getWriter();
+        Singleton.serviceRunning=true;
 	}
 	
 	/**
@@ -73,6 +74,7 @@ public class SendsorService extends Service implements AccelerometerListener{
 		AccelerometerManager.stopListening();
 		writer.flushout();
 		writer.stopWriting();
+		Singleton.serviceRunning=false;
 		Toast.makeText(this, "Service gestopt", Toast.LENGTH_LONG).show();
 
 	}

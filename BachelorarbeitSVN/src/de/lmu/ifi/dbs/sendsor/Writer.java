@@ -7,11 +7,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Date;
 
 import android.content.Context;
-import android.hardware.Camera.Size;
 import android.os.Environment;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -21,6 +20,7 @@ import android.widget.Toast;
  *
  */
 public class Writer{
+	private static final String TAG = "SendsorActivity";
 	private Context context;
 	private BufferedWriter out;
 	private File filepath = Environment.getExternalStorageDirectory();
@@ -47,12 +47,14 @@ public class Writer{
 			reader.close();
 		}
 		catch(Exception e){
+			Log.v(TAG, e.getMessage());
 		}
 		try {
-			out = new BufferedWriter(new FileWriter(new File(filepath, filename),true),76800);
+			out = new BufferedWriter(new FileWriter(new File(filepath, filename),true),768);
+			Log.v(TAG, "Datenschreiber gestartet");
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			Log.v(TAG, e.getMessage());
 		}
 		Toast.makeText(SendsorActivity.getContext(), "Writer gestartet", 5).show();
 
@@ -83,7 +85,7 @@ public class Writer{
 			//out.write(d.getYear()+"-"+d.getMonth()+"-"+d.getDay()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"."+milli+","+(int)x+","+(int)y+","+(int)z+lineSeparator);
 			out.write(c.get(Calendar.YEAR)+"-"+c.get(Calendar.MONTH)+"-"+c.get(Calendar.DATE)+" "+c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE)+":"+c.get(Calendar.SECOND)+"."+c.get(Calendar.MILLISECOND)+","+(int)x+","+(int)y+","+(int)z+","+activity+lineSeparator);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			Log.v(TAG, e.getMessage());
 		}
 	}
 	
@@ -93,7 +95,9 @@ public class Writer{
 	public void flushout(){
 		try {
 			out.flush();
+			Log.v(TAG, "Puffer geschrieben");
 		} catch (IOException e) {
+			Log.v(TAG, e.getMessage());
 		}
 	}
 	
@@ -103,7 +107,7 @@ public class Writer{
 			out.close();
 			Toast.makeText(SendsorActivity.getContext(), "Writer gestopt", 5).show();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.v(TAG, e.getMessage());
 		}
 	}
 	

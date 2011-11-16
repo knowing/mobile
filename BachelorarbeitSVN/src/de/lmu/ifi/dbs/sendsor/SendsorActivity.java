@@ -24,7 +24,7 @@ public class SendsorActivity extends Activity{
     /*
      * Gettermethoden 
      */
-    
+  
 	
     /**
      * Wird beim Methodenstart aufgerufen und initialisiert halles.
@@ -39,6 +39,7 @@ public class SendsorActivity extends Activity{
         ((TextView) findViewById(R.id.text)).setText("Bitte die Datenaufzeichnung starten!");
         button = (Button) findViewById(R.id.startstop);
         button.setText("start");
+        startet=Singleton.serviceRunning;
  
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -60,26 +61,7 @@ public class SendsorActivity extends Activity{
             }
         });
         ((TextView) findViewById(R.id.text)).setText("Bitte die Datenaufzeichnung starten!");
-        activityButton = (Button) findViewById(R.id.startstop);
-        activityButton.setText("ich laufe jetzt");
  
-        //TODO Buttons für Activities erstellen
-        activityButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (Boolean.FALSE.equals(startet)){
-                    ((TextView) findViewById(R.id.text)).setText("ich laufe nicht mehr!");
-                    startet=true;
-                    activityButton.setText("stoppen");
-
-                }
-                else{
-                    ((TextView) findViewById(R.id.text)).setText("ich laufe jetzt");
-                    startet = false;
-                    button.setText("starten");
-
-                }
-            }
-        });
 
     }
     
@@ -103,8 +85,8 @@ public class SendsorActivity extends Activity{
      */
     protected void onDestroy() {
         super.onDestroy();
-        Intent intent = new Intent(this, SendsorService.class);
-        stopService(intent);
+        //Intent intent = new Intent(this, SendsorService.class);
+        //stopService(intent);
 
  
     }
