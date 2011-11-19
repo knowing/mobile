@@ -67,7 +67,7 @@ public class SendsorActivity extends Activity{
                 }
             }
         });
-
+        //Ende des Klicklisteners
     }
     
     /**
@@ -90,8 +90,9 @@ public class SendsorActivity extends Activity{
      */
     protected void onDestroy() {
         super.onDestroy();
-        //Intent intent = new Intent(this, SendsorService.class);
-        //stopService(intent);
+        /*
+         * Der Service laeuft noch weiter!
+         */
 
  
     }

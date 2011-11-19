@@ -10,4 +10,9 @@ public class Singleton {
 		}
 		return writer;
 	}
+	
+	public static void killWriter(){
+		writer.stopWriting();
+		writer=null;
+	}
 }

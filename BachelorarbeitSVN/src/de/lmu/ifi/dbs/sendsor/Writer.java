@@ -83,8 +83,8 @@ public class Writer{
 			//String.format
 			//out.write(System.currentTimeMillis()+";"+x+";"+y+";"+z+lineSeparator);*/
 			//out.write(d.getYear()+"-"+d.getMonth()+"-"+d.getDay()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"."+milli+","+(int)x+","+(int)y+","+(int)z+lineSeparator);
-			//out.write(c.get(Calendar.YEAR)+"-"+c.get(Calendar.MONTH)+"-"+c.get(Calendar.DATE)+" "+c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE)+":"+c.get(Calendar.SECOND)+"."+c.get(Calendar.MILLISECOND)+","+(int)x+","+(int)y+","+(int)z+","+activity+lineSeparator);
-			out.write(System.currentTimeMillis()+","+(int)x+","+(int)y+","+(int)z+","+activity+lineSeparator);
+			out.write(c.get(Calendar.YEAR)+"-"+c.get(Calendar.MONTH)+"-"+c.get(Calendar.DATE)+" "+c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE)+":"+c.get(Calendar.SECOND)+"."+c.get(Calendar.MILLISECOND)+","+(int)x+","+(int)y+","+(int)z+","+activity+lineSeparator);
+			//out.write(System.currentTimeMillis()+","+(int)x+","+(int)y+","+(int)z+","+activity+lineSeparator);
 		} catch (IOException e) {
 			Log.v(TAG, e.getMessage());
 		}
@@ -106,6 +106,7 @@ public class Writer{
 		try {
 			out.flush();
 			out.close();
+			Singleton.killWriter();
 			Toast.makeText(SendsorActivity.getContext(), "Writer gestopt", 5).show();
 		} catch (IOException e) {
 			Log.v(TAG, e.getMessage());
