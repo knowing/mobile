@@ -1,4 +1,4 @@
-package de.sensor.writer;
+package de.lmu.ifi.dbs.sendsor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
