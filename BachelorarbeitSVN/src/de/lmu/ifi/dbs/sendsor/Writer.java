@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -13,6 +14,7 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
+import android.*;
 
 /**
  * Klasse zum Schreiben der Accelerometerdaten
@@ -51,7 +53,8 @@ public class Writer{
 			Log.v(TAG, e.getMessage());
 		}
 		try {
-			out = new BufferedWriter(new FileWriter(new File(filepath, filename),true),768);
+			//out = new BufferedWriter(new FileWriter(new File(filepath, filename),true),768);
+			out = new BufferedWriter(new OutputStreamWriter(context.openFileOutput(filename, context.MODE_APPEND)));
 			Log.v(TAG, "Datenschreiber gestartet");
 			
 		} catch (IOException e) {
