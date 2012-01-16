@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import android.content.Context;
@@ -76,6 +77,10 @@ public class Writer{
 			z/=9.81;
 			z*=64;
 			Calendar c = Calendar.getInstance();
+		    String Monat = "MM";
+		    String Tag = "dd";
+		    SimpleDateFormat sdfm = new SimpleDateFormat(Monat);
+		    SimpleDateFormat sdfd = new SimpleDateFormat(Tag);
 			/*
 			long ms = System.currentTimeMillis();
 			String milli = Long.toString(ms).substring(10);
@@ -83,7 +88,7 @@ public class Writer{
 			//String.format
 			//out.write(System.currentTimeMillis()+";"+x+";"+y+";"+z+lineSeparator);*/
 			//out.write(d.getYear()+"-"+d.getMonth()+"-"+d.getDay()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"."+milli+","+(int)x+","+(int)y+","+(int)z+lineSeparator);
-			out.write(c.get(Calendar.YEAR)+"-"+c.get(Calendar.MONTH)+"-"+c.get(Calendar.DATE)+" "+c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE)+":"+c.get(Calendar.SECOND)+"."+c.get(Calendar.MILLISECOND)+","+(int)x+","+(int)y+","+(int)z+","+activity+lineSeparator);
+			out.write(c.get(Calendar.YEAR)+"-"+sdfm.format(c.get(Calendar.MONTH))+"-"+sdfd.format(c.get(Calendar.DATE))+" "+c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE)+":"+c.get(Calendar.SECOND)+"."+c.get(Calendar.MILLISECOND)+","+(int)x+","+(int)y+","+(int)z+","+activity+lineSeparator);
 			//out.write(System.currentTimeMillis()+","+(int)x+","+(int)y+","+(int)z+","+activity+lineSeparator);
 		} catch (IOException e) {
 			Log.v(TAG, e.getMessage());
