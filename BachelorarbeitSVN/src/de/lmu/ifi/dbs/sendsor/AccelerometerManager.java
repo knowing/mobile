@@ -114,7 +114,7 @@ public class AccelerometerManager implements Config {
         List<Sensor> sensors = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);//Vorhandene Sensoren in einer Liste speichern
         if (sensors.size() > 0) {
             sensor = sensors.get(0);
-            running = sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_FASTEST);//TODO Auf echtzeit setzen
+            running = sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_NORMAL);//TODO Auf echtzeit setzen
             listener = accelerometerListener;
         }
     }
