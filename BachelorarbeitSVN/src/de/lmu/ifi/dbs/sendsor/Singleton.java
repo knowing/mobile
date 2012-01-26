@@ -6,7 +6,7 @@ public class Singleton {
 	
 	public  static Writer getWriter(){
 		if(writer==null){
-			writer=new Writer("database3.csv");
+			writer=new Writer("database4.csv");
 		}
 		return writer;
 	}

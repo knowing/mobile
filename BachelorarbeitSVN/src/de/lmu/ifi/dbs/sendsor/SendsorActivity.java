@@ -10,7 +10,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +25,8 @@ public class SendsorActivity extends Activity{
     private Button activityButton;
     boolean startet = false;
     private static Writer writer;
+    private PowerManager mPowerManager;
+    private WakeLock mWakeLock;
     /*
      * Gettermethoden 
      */
@@ -68,6 +74,9 @@ public class SendsorActivity extends Activity{
             }
         });
         //Ende des Klicklisteners
+        mPowerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        mWakeLock = mPowerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, getClass().getName());
+
     }
     
     /**
@@ -75,6 +84,8 @@ public class SendsorActivity extends Activity{
      */
     protected void onResume() {
         super.onResume();
+        mWakeLock.acquire();
+
     }
  
     /**
@@ -90,6 +101,7 @@ public class SendsorActivity extends Activity{
      */
     protected void onDestroy() {
         super.onDestroy();
+       // writer.stopWriting();
         /*
          * Der Service laeuft noch weiter!
          */
