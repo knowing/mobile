@@ -1,15 +1,12 @@
 package de.lmu.ifi.dbs.sendsor;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+
 
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Environment;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -18,7 +15,7 @@ import android.widget.Toast;
 /**
  * Service, der das Erfassen im Hintergrund steuert.
  * @author walonka
- * @version 0.5
+ * @version 1.0
  */
 public class SendsorService extends Service implements AccelerometerListener{
 
@@ -63,6 +60,8 @@ public class SendsorService extends Service implements AccelerometerListener{
 	
 	/**
 	 * Methode, die beim Start des Service ausgef&uuml;rt wird
+	 * 
+	 * Dabei wird der AccelerometerListener beobachtet und die Aufzeichnung gestartet. Der Gebundene Powermanager sperrt die CPU-Abschaltung.
 	 */
 	public void onCreate(){
 		
@@ -93,7 +92,7 @@ public class SendsorService extends Service implements AccelerometerListener{
 		writer.flushout();
 		writer.stopWriting();
 		Singleton.serviceRunning=false;
-		Toast.makeText(this, "Service gestopt", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "Service gestoppt", Toast.LENGTH_LONG).show();
 
 	}
 

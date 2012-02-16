@@ -4,8 +4,39 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<TextView android:id="@+id/text" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-<Button android:text="Button" android:id="@+id/startstop" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-<AnalogClock android:id="@+id/analogClock1" android:layout_width="wrap_content" android:layout_height="wrap_content"></AnalogClock>
-<DigitalClock android:text="DigitalClock" android:id="@+id/digitalClock1" android:layout_width="wrap_content" android:layout_height="wrap_content"></DigitalClock>
+    
+
+    <DigitalClock
+        android:id="@+id/digitalClock1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DigitalClock" 
+   		android:layout_gravity="center"
+        />
+	<TextView 
+	    android:id="@+id/line" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="2dip"
+	    android:background="#CCCCCC">
+	</TextView>  
+	<TextView 
+	    android:id="@+id/text" 
+	    android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    >
+	    
+	</TextView>
+	<TextView 
+	    android:id="@+id/abstand" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="10dip"
+	    >
+	</TextView>
+
+<Button
+    android:id="@+id/startstop"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="Button" />
 </LinearLayout>

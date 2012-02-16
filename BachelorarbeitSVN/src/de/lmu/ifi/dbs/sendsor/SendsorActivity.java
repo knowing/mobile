@@ -1,9 +1,7 @@
 package de.lmu.ifi.dbs.sendsor;
 
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,10 +17,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Mainklasse die bei Programmstart ausge&uuml;hrt wird und die Interaktion mit dem User &uuml;bernimmt.
+ * @author walonka
+ * @version 1.0
+ *
+ */
 public class SendsorActivity extends Activity{
     private static Context CONTEXT;
     private Button button;
-    private Button activityButton;
     boolean startet = false;
     private static Writer writer;
     private PowerManager mPowerManager;
@@ -33,7 +36,7 @@ public class SendsorActivity extends Activity{
   
 	
     /**
-     * Wird beim Methodenstart aufgerufen und initialisiert halles.
+     * Wird beim Methodenstart aufgerufen und initialisiert alles.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,21 +55,22 @@ public class SendsorActivity extends Activity{
         startet=Singleton.serviceRunning; //ist der Service gestartet?
  
         if(Boolean.TRUE.equals(startet)){
-            ((TextView) findViewById(R.id.text)).setText("Datenaufzeichnung laeuft!");
+            ((TextView) findViewById(R.id.text)).setText("Die Datenaufzeichnung wurde gestartet und kann mit stop beendet werden! Die Daten befinden sich danach auf Ihrer Speicherkarte.");
             button.setText("stoppen");
         }
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ((TextView) findViewById(R.id.text)).setText("klick");
                 if (Boolean.FALSE.equals(startet)){
-                    ((TextView) findViewById(R.id.text)).setText("Gestartet!");
+                    ((TextView) findViewById(R.id.text)).setText("Die Datenaufzeichnung wurde gestartet und kann mit stop beendet werden! Die Daten befinden sich danach auf Ihrer Speicherkarte.");
                     startet=true;
                     button.setText("stoppen");
                     CONTEXT.startService(intent);
 
                 }
                 else{
-                    ((TextView) findViewById(R.id.text)).setText("Gestoppt");
+                    ((TextView) findViewById(R.id.text)).setText("Bitte die Datenaufzeichnung starten!");
+                    
                     startet = false;
                     button.setText("starten");
                     CONTEXT.stopService(intent);

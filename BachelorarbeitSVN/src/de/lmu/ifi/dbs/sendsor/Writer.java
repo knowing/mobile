@@ -22,7 +22,7 @@ import android.*;
 /**
  * Klasse zum Schreiben der Accelerometerdaten
  * @author walonka
- * @version 0.5
+ * @version 1.0
  *
  */
 public class Writer{
@@ -31,34 +31,28 @@ public class Writer{
 	private BufferedWriter out;
 	private File filepath = Environment.getExternalStorageDirectory();
 	private String filename;
-	private String activity="";
 	final static String lineSeparator = System.getProperty("line.separator");
-	
+
 	/**
 	 * Konstruktor der Writerklasse
 	 * @param filename Dateiname (wo soll die Datenbank gespeichert werden?)
 	 */
+	@SuppressWarnings("static-access")
 	public Writer (String filename){
 		this.context=SendsorActivity.getContext();
 		this.filename=filename;
-		
-		boolean initializised = false;
-		/*
-		try{
-			BufferedReader reader = new BufferedReader(new FileReader(new File(filepath, filename)));
-			if (reader.readLine()!=null){
-				initializised=true;
-			}
-			else{
-			}
-			reader.close();
-		}
-		catch(Exception e){
-			Log.v(TAG, e.getMessage());
-		}*/
 		try {
 			//out = new BufferedWriter(new FileWriter(new File(filepath, filename),true),768);
-			out = new BufferedWriter(new OutputStreamWriter(context.openFileOutput(filename, context.MODE_APPEND)),256*1024);
+			out = new BufferedWriter(new OutputStreamWriter(context.openFileOutput(filename, context.MODE_PRIVATE)),256*1024);
+			out.write("@relation time_series"+lineSeparator+lineSeparator);
+			out.write("@attribute timestamp date 'yyyy-MM-dd HH:mm:ss.SSS'"+lineSeparator);
+			out.write("@attribute y0 numeric"+lineSeparator);
+			out.write("@attribute y1 numeric"+lineSeparator);
+			out.write("@attribute y2 numeric"+lineSeparator+lineSeparator);
+			out.write("@data"+lineSeparator);
+			
+
+
 			Log.v(TAG, "Datenschreiber gestartet");
 			
 		} catch (IOException e) {
@@ -84,18 +78,35 @@ public class Writer{
 			z/=9.81;
 			z*=64;
 			Calendar c = Calendar.getInstance();
-		    String Monat = "MM";
-		    String Tag = "dd";
-		    SimpleDateFormat sdfm = new SimpleDateFormat(Monat);
-		    SimpleDateFormat sdfd = new SimpleDateFormat(Tag);
-			/*
-			long ms = System.currentTimeMillis();
-			String milli = Long.toString(ms).substring(10);
-			Date d = new Date(ms);
-			//String.format
-			//out.write(System.currentTimeMillis()+";"+x+";"+y+";"+z+lineSeparator);*/
-			//out.write(d.getYear()+"-"+d.getMonth()+"-"+d.getDay()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"."+milli+","+(int)x+","+(int)y+","+(int)z+lineSeparator);
-			out.write(c.get(Calendar.YEAR)+"-"+sdfm.format(c.get(Calendar.MONTH))+"-"+sdfd.format(c.get(Calendar.DATE))+" "+c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE)+":"+c.get(Calendar.SECOND)+"."+c.get(Calendar.MILLISECOND)+","+(int)x+","+(int)y+","+(int)z+","+activity+lineSeparator);
+			String jahr  = Integer.toString(c.get(Calendar.YEAR));
+			String monat = Integer.toString((c.get(Calendar.MONTH)+1));
+			if (monat.length()<2){
+				monat = "0"+monat;
+			}
+			String tag   = Integer.toString(c.get(Calendar.DAY_OF_MONTH));
+			if(tag.length()<2){
+				tag = "0"+tag;
+			}
+			String stunde   = Integer.toString(c.get(Calendar.HOUR_OF_DAY));
+			if(stunde.length()<2){
+				stunde = "0"+stunde;
+			}
+			String minute   = Integer.toString(c.get(Calendar.MINUTE));
+			if(minute.length()<2){
+				minute = "0"+minute;
+			}
+			String milli = Integer.toString(c.get(Calendar.MILLISECOND));
+			if(milli.length()<2){
+				milli="0"+milli;
+			}
+			String sekunde = Integer.toString(c.get(Calendar.SECOND));
+			if(sekunde.length()<2){
+				sekunde="0"+sekunde;
+			}
+			if(milli.length()<3){
+				milli="0"+milli;
+			}
+			out.write("\'"+jahr+"-"+monat+"-"+tag+" "+stunde+":"+minute+":"+sekunde+"."+milli+"\',"+(int)x+","+(int)y+","+(int)z+lineSeparator);
 			//out.write(System.currentTimeMillis()+","+(int)x+","+(int)y+","+(int)z+","+activity+lineSeparator);
 		} catch (IOException e) {
 			Log.v(TAG, e.getMessage());
@@ -114,29 +125,35 @@ public class Writer{
 		}
 	}
 	
+	/**
+	 * Beendet die Datenaufzeichnung und exportiert die Daten
+	 */
 	public void stopWriting(){
 		try {
 			out.flush();
 			out.close();
 			Singleton.killWriter();
-			Toast.makeText(SendsorActivity.getContext(), "Writer gestopt", 5).show();
+			Toast.makeText(SendsorActivity.getContext(), "Writer gestoppt", 5).show();
 			export();
 		} catch (IOException e) {
 			Log.v(TAG, e.getMessage());
 		}
 	}
 	
-	public void setActivity(String activity){
-		this.activity=activity;
-	}
-	
+
+	/**
+	 * Methode zum Exportieren der geschriebenen Datei auf die SD-Karte.
+	 */
 	public void export(){
-		String exportname = Long.toString(System.currentTimeMillis());
+		
 		//File quelle = context.openFile))		//new File("/home/user/inputFile.txt");
 
         try{
     		FileChannel quelle = context.openFileInput(filename).getChannel();
-            File ziel = new File(filepath, "export.csv"); 
+    		Calendar c = Calendar.getInstance();
+    		
+    		String name = "Export_"+c.get(Calendar.YEAR)+"_"+(c.get(Calendar.MONTH)+1)+"_"+c.get(Calendar.DATE)+"_"+c.get(Calendar.HOUR_OF_DAY)+"_"+c.get(Calendar.MINUTE)+".arff";
+            File ziel = new File(filepath, name); 
         	copyFile(quelle, ziel);
 			Toast.makeText(SendsorActivity.getContext(), "Daten exportiert", 5).show();
         }
@@ -148,6 +165,12 @@ public class Writer{
 	}
 	
     
+	/**
+	 * Methode zum Kopieren einer Datei
+	 * @param in Quelle im gesch&uuml;tzten Applikationsverzeichnis
+	 * @param out Schreibziel (Speicherkarte)
+	 * @throws IOException
+	 */
     public static void copyFile(FileChannel in, File out) throws IOException {
         FileChannel inChannel = in;
         FileChannel outChannel = new FileOutputStream(out).getChannel();

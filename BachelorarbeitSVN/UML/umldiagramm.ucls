@@ -1,0 +1,102 @@
+<class-diagram version="1.0.6" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="de.lmu.ifi.dbs.sendsor.SendsorActivity" 
+    project="BachelorarbeitSVN" file="/BachelorarbeitSVN/src/de/lmu/ifi/dbs/sendsor/SendsorActivity.java" binary="false">    
+    <position height="-1" width="-1" x="136" y="136"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="de.lmu.ifi.dbs.sendsor.Singleton" 
+    project="BachelorarbeitSVN" file="/BachelorarbeitSVN/src/de/lmu/ifi/dbs/sendsor/Singleton.java" binary="false">    
+    <position height="-1" width="-1" x="125" y="416"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" name="de.lmu.ifi.dbs.sendsor.SendsorService" 
+    project="BachelorarbeitSVN" file="/BachelorarbeitSVN/src/de/lmu/ifi/dbs/sendsor/SendsorService.java" binary="false">    
+    <position height="-1" width="-1" x="484" y="662"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="de.lmu.ifi.dbs.sendsor.AccelerometerManager" 
+    project="BachelorarbeitSVN" file="/BachelorarbeitSVN/src/de/lmu/ifi/dbs/sendsor/AccelerometerManager.java" 
+    binary="false">    
+    <position height="-1" width="-1" x="482" y="127"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="de.lmu.ifi.dbs.sendsor.Writer" project="BachelorarbeitSVN" 
+    file="/BachelorarbeitSVN/src/de/lmu/ifi/dbs/sendsor/Writer.java" binary="false">    
+    <position height="-1" width="-1" x="128" y="662"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" corner="BOTTOM_RIGHT" language="java" name="de.lmu.ifi.dbs.sendsor.AccelerometerListener" 
+    project="BachelorarbeitSVN" file="/BachelorarbeitSVN/src/de/lmu/ifi/dbs/sendsor/AccelerometerListener.java" 
+    binary="false">    
+    <position height="-1" width="-1" x="482" y="408"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <dependency id="7">    
+    <bendpoint x="268" y="473"/>    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <association id="8">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="9" name="writer"/>      
+      <multiplicity id="10" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="11">    
+    <bendpoint x="227" y="323"/>    
+    <bendpoint x="226" y="475"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="12" name="writer"/>      
+      <multiplicity id="13" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="14">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="15" name="listener"/>      
+      <multiplicity id="16" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="17">    
+    <bendpoint x="486" y="501"/>    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="18">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="19" name="writer"/>      
+      <multiplicity id="20" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

@@ -12,16 +12,14 @@ import android.hardware.SensorManager;
 /**
  * Verwaltet die Sensoren und gibt Werte weiter
  * @author walonka
- * @version 0.5
+ * @version 1.0
  */
-public class AccelerometerManager implements Config {
+public class AccelerometerManager {
 	private static Sensor sensor;
     private static SensorManager sensorManager;
     private static AccelerometerListener listener;
 
     /** Accuracy configuration */
-    private static float threshold     = 0.2f;
-    private static int interval     = 1000;
     
 	/**
 	 *  Zeigt an, ob ein unterst&uuml;tzter Sensor vorhanden ist     
@@ -99,10 +97,6 @@ public class AccelerometerManager implements Config {
      * @param threshold Minimum f&uuml;r Accelerometer
      * @param interval Intervall
      */
-    public static void setConfig(int threshold, int interval) {
-        AccelerometerManager.threshold = threshold;
-        AccelerometerManager.interval = interval;
-    }
 
 
     /**
@@ -114,7 +108,7 @@ public class AccelerometerManager implements Config {
         List<Sensor> sensors = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);//Vorhandene Sensoren in einer Liste speichern
         if (sensors.size() > 0) {
             sensor = sensors.get(0);
-            running = sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_NORMAL);//TODO Auf echtzeit setzen
+            running = sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_FASTEST);//TODO Auf echtzeit setzen
             listener = accelerometerListener;
         }
     }
@@ -126,7 +120,6 @@ public class AccelerometerManager implements Config {
      * @param interval Intervall
      */
     public static void startListening(AccelerometerListener accelerometerListener, int threshold, int interval) {
-        setConfig(threshold, interval);
         startListening(accelerometerListener);
     }
 
